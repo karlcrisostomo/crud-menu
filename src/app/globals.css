@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input {
+  @apply border my-2  p-2 rounded-sm;
+}
+select {
+  @apply py-2  border mb-5;
+}
+label {
+  @apply font-medium;
+}
+
