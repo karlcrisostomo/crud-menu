@@ -12,11 +12,9 @@ const Constants = () => {
     {
       field: "id",
       headerName: "ID",
-      width: 200,
+      width: 150,
       filterable: false,
       hideable: false,
-      resizable: false,
-      flex: 1,
     },
     {
       field: "menu",
@@ -24,8 +22,6 @@ const Constants = () => {
       width: 250,
       filterable: false,
       hideable: false,
-      resizable: false,
-      flex: 1,
     },
     {
       field: "category",
@@ -33,8 +29,6 @@ const Constants = () => {
       width: 200,
       filterable: false,
       hideable: false,
-      resizable: false,
-      flex: 1,
     },
     {
       field: "stock",
@@ -42,8 +36,6 @@ const Constants = () => {
       width: 100,
       filterable: false,
       hideable: false,
-      resizable: false,
-      flex: 1,
     },
     {
       field: "options",
@@ -51,15 +43,11 @@ const Constants = () => {
       width: 150,
       filterable: false,
       hideable: false,
-      resizable: false,
-      flex: 1,
     },
     {
       field: "price",
       headerName: "Price (₱)",
       width: 160,
-      resizable: false,
-      flex: 1,
     },
     {
       field: "actions",
@@ -68,8 +56,7 @@ const Constants = () => {
       filterable: false,
       hideable: false,
       resizable: false,
-      flex: 1,
-      width: 168,
+      width: 170,
       renderCell: (params) => (
         <>
           <GridActionsCellItem

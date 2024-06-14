@@ -1,5 +1,6 @@
 "use client";
 
+import { IslandNotification } from "@/components";
 import { db } from "@/services/firebase-config";
 import { push, ref, set, onValue, update, remove } from "firebase/database";
 
@@ -42,6 +43,7 @@ export const FormProvider = ({ children }) => {
   const [selectedRowId, setSelectedRowId] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
+  const [isNotification, setNotification] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       const dataRef = ref(db, "categories");
@@ -63,7 +65,6 @@ export const FormProvider = ({ children }) => {
         alert("Error: No data provided to save.");
         return;
       }
-
       const dataRef = ref(db, `categories/${formData.category}`);
 
       if (formData.id) {
@@ -72,7 +73,13 @@ export const FormProvider = ({ children }) => {
           `categories/${formData.category}/${formData.id}`
         );
         await update(updatedRef, formData);
-        alert("Data updated successfully");
+
+        setNotification({
+          message: "Menu Updated Successfully!",
+          type: "Success",
+          duration: 1000,
+        });
+
         setModalOpen(false);
         return;
       }
@@ -81,11 +88,19 @@ export const FormProvider = ({ children }) => {
       const newId = newDocRef.key;
       const updatedFormData = { ...formData, id: newId };
       await set(newDocRef, updatedFormData);
-      alert("Data saved successfully");
+      setNotification({
+        message: "Menu Saved Successfully!",
+        type: "Success",
+        duration: 1000,
+      });
       setModalOpen(false);
     } catch (error) {
       console.error("Error:", error.message);
-      alert("Error: An error occurred while saving data.");
+      setNotification({
+        message: "Error: An error occurred while saving data.",
+        type: "error",
+        duration: 1000,
+      });
     }
   };
 
@@ -143,14 +158,26 @@ export const FormProvider = ({ children }) => {
     try {
       const deleteRef = ref(db, `categories/${category}/${id}`);
       await remove(deleteRef);
+      setNotification({
+        message: "Menu deleted successfully!",
+        type: "Success",
+        duration: 1000,
+      });
     } catch (error) {
       console.error("Error:", error.message);
+      setNotification({
+        message: "Error: An error occurred while deleting Menu.",
+        type: "error",
+        duration: 1000,
+      });
     }
   };
 
   return (
     <FormDataContext.Provider
       value={{
+        isNotification,
+        setNotification,
         optionsList,
         categoryList,
         handleSaveData,

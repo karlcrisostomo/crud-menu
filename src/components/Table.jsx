@@ -11,8 +11,6 @@ import { handleRowDelete, handleSearch } from "@/utils/tableHandlers";
 import { useFormDataContext } from "@/context/FormDataContext";
 import Constants from "@/constants";
 
-
-
 const Table = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -57,8 +55,9 @@ const Table = () => {
   }, []);
 
   return (
-    <section className="min-[200px]:p-6    max-w-7xl mx-auto flex flex-col h-screen justify-center">
-      <Box sx={{ width: "100%"  }}>
+    <section className="min-[200px]:p-6 max-w-7xl mx-auto flex flex-col h-screen justify-center">
+    
+      <Box sx={{ width: "100%" }}>
         <Grid item>
           <SearchBar
             data={data}
@@ -85,10 +84,9 @@ const Table = () => {
           </Grid>
         </Grid>
 
-        <Grid item  sx={{width:'100%'}}>
+        <Grid sx={{ width: "100%" }}>
           <DataGrid
-             autoHeight
-          
+            autoHeight
             sx={{
               fontFamily: "Poppins, sans-serif",
               boxShadow: 2,
