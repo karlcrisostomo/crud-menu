@@ -44,6 +44,8 @@ export const FormProvider = ({ children }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const [isNotification, setNotification] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       const dataRef = ref(db, "categories");
@@ -65,21 +67,25 @@ export const FormProvider = ({ children }) => {
         alert("Error: No data provided to save.");
         return;
       }
-  
-      if (formData.id) { // Check if formData.id exists
-        const updatedRef = ref(db, `categories/${formData.category}/${formData.id}`);
+
+      if (formData.id) {
+        // Check if formData.id exists
+        const updatedRef = ref(
+          db,
+          `categories/${formData.category}/${formData.id}`
+        );
         await update(updatedRef, formData);
-  
+
         setNotification({
           message: "Menu Updated Successfully!",
           type: "Success",
           duration: 1000,
         });
-  
+
         setModalOpen(false);
         return;
       }
-  
+
       const dataRef = ref(db, `categories/${formData.category}`);
       const newDocRef = push(dataRef);
       const newId = newDocRef.key;
@@ -100,7 +106,7 @@ export const FormProvider = ({ children }) => {
       });
     }
   };
-  
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -149,6 +155,7 @@ export const FormProvider = ({ children }) => {
     setSelectedRowId(item.id);
     setFormData(item);
     setModalOpen(true);
+    setIsEditing(true);
   };
 
   const handleDelete = async (category, id) => {
@@ -174,6 +181,8 @@ export const FormProvider = ({ children }) => {
     <FormDataContext.Provider
       value={{
         isNotification,
+        isEditing,
+        setIsEditing,
         setNotification,
         optionsList,
         categoryList,

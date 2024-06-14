@@ -8,6 +8,7 @@ import { onSubmitValidation } from "@/utils/onSubmitValidation";
 
 const Form = ({ data }) => {
   const {
+    isEditing,
     handleInputChange,
     handleSaveData,
     formData,
@@ -122,6 +123,7 @@ const Form = ({ data }) => {
                 value={formData.category}
                 onChange={(e) => handleInputChange(e)}
                 name="category"
+                disabled={isEditing}
               >
                 {categoryList.map((option, index) => (
                   <option disabled={index === 0} key={index} value={option}>
@@ -129,10 +131,16 @@ const Form = ({ data }) => {
                   </option>
                 ))}
               </select>
-              {validationErrors.category && (
-                <span className="text-red-500">
-                  {validationErrors.category}
+              {isEditing ? (
+                <span className="text-red-500 -translate-y-2">
+                  Category cannot be edited
                 </span>
+              ) : (
+                validationErrors.category && (
+                  <span className="text-red-500">
+                    {validationErrors.category}
+                  </span>
+                )
               )}
               <label>STOCK</label>
               <input

@@ -16,7 +16,7 @@ const Table = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const { columns } = Constants();
-  const { setModalOpen } = useFormDataContext();
+  const { setModalOpen, setIsEditing } = useFormDataContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,7 +56,6 @@ const Table = () => {
 
   return (
     <section className="min-[200px]:p-6 max-w-7xl mx-auto flex flex-col h-screen justify-center">
-    
       <Box sx={{ width: "100%" }}>
         <Grid item>
           <SearchBar
@@ -69,7 +68,13 @@ const Table = () => {
         <Grid container spacing={2} marginBottom={2}>
           <Grid item>
             {selectedRows.length === 0 ? (
-              <Button variant="contained" onClick={() => setModalOpen(true)}>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  setModalOpen(true);
+                  setIsEditing(false);
+                }}
+              >
                 Add Menu
               </Button>
             ) : (
