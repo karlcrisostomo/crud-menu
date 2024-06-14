@@ -14,7 +14,7 @@ const IslandNotification = ({ message, type, duration }) => {
   }, [duration, setNotification]);
 
   return (
-    <div className=" fixed top-[5em] left-0 flex justify-center w-full ">
+    <div className=" fixed top-[5em] left-0 flex justify-center w-full z-50 ">
       <span
         className={` p-4 rounded-md text-white  ${
           type === "Success" ? "bg-green-700" : " bg-red-600"
