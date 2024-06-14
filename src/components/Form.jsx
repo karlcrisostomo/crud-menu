@@ -6,7 +6,6 @@ import { useEffect, useRef } from "react";
 import { handleKeyDown } from "@/utils/keyBoardUtils";
 import { onSubmitValidation } from "@/utils/onSubmitValidation";
 
-
 const Form = ({ data }) => {
   const {
     handleInputChange,
@@ -91,7 +90,7 @@ const Form = ({ data }) => {
             onSubmit={(e) => handleSubmit(e)}
             ref={formRef}
           >
-            <div className="flex-col flex w-[400px] h-full bg-white rounded-lg outline-double outline-white/10 p-4">
+            <div className="flex-col flex max-sm:w-[350px] sm:w-[400px] h-full bg-white rounded-lg outline-double outline-white/10 p-4">
               <div className=" mb-8 flex justify-between ">
                 <label className=" text-center  ">
                   {selectedRowId == null ? "ADD MENU ITEM " : "EDIT MENU ITEM"}
@@ -111,7 +110,7 @@ const Form = ({ data }) => {
                 name="menu"
                 value={formData.menu}
                 onChange={handleInputChange}
-                placeholder="menu"
+                placeholder="e.g., Fries"
               />
               {validationErrors.menu && (
                 <span className="text-red-500">{validationErrors.menu}</span>
