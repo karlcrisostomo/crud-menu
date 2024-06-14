@@ -3,6 +3,7 @@ export const onSubmitValidation = (formData, data, setErrors) => {
 
   const duplicateMenu = data.find(
     (item) =>
+      item.id !== formData.id &&
       item.menu.trim().toLowerCase() === formData.menu.trim().toLowerCase() &&
       item.category === formData.category &&
       item.stock === formData.stock &&
