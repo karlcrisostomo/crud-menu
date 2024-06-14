@@ -65,25 +65,22 @@ export const FormProvider = ({ children }) => {
         alert("Error: No data provided to save.");
         return;
       }
-      const dataRef = ref(db, `categories/${formData.category}`);
-
-      if (formData.id) {
-        const updatedRef = ref(
-          db,
-          `categories/${formData.category}/${formData.id}`
-        );
+  
+      if (formData.id) { // Check if formData.id exists
+        const updatedRef = ref(db, `categories/${formData.category}/${formData.id}`);
         await update(updatedRef, formData);
-
+  
         setNotification({
           message: "Menu Updated Successfully!",
           type: "Success",
           duration: 1000,
         });
-
+  
         setModalOpen(false);
         return;
       }
-
+  
+      const dataRef = ref(db, `categories/${formData.category}`);
       const newDocRef = push(dataRef);
       const newId = newDocRef.key;
       const updatedFormData = { ...formData, id: newId };
@@ -103,7 +100,7 @@ export const FormProvider = ({ children }) => {
       });
     }
   };
-
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
