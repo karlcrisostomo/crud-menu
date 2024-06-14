@@ -1,9 +1,9 @@
-import { Table } from "@/components";
+import { ComponentWrapper, Table } from "@/components";
 
 export default function Home() {
   return (
     <main>
-      <Table />
+      <ComponentWrapper />
     </main>
   );
 }
