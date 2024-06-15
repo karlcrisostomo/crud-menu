@@ -55,7 +55,7 @@ const Table = () => {
   }, []);
 
   return (
-    <section className="min-[200px]:p-6 max-w-7xl mx-auto flex flex-col h-screen justify-center">
+    <section className="min-[200px]:p-6 max-w-7xl mx-auto flex flex-col h-full justify-center ">
       <Box sx={{ width: "100%" }}>
         <Grid item>
           <SearchBar
@@ -101,6 +101,12 @@ const Table = () => {
               "& .MuiDataGrid-columnHeader": {
                 backgroundColor: "orange",
                 fontWeight: "bold",
+              },
+            }}
+            pageSizeOptions={[10, 25, 50, 100]}
+            initialState={{
+              pagination: {
+                paginationModel: { pageSize: 10, page: 0 },
               },
             }}
             rows={filteredData}
